@@ -26,7 +26,7 @@ class ViewServiceProvider extends AbstractServiceProvider
             $loader = new FilesystemLoader(base_path('views'));
 
             $twig = new Environment($loader, [
-                'cache' => false
+                'cache' => base_path('storage/cache/views')
             ]);
 
             return new View($twig);

@@ -11,7 +11,7 @@ use League\Route\Router;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-session_start();
+//session_start();
 
 /* Load environment variables */
 try {
