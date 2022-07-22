@@ -20,14 +20,11 @@ try {
     die($exception->getMessage());
 }
 
-/* Container setup */
-$container = new Container;
-
-// Autowire
-$container->delegate(new ReflectionContainer);
-
-$container->addServiceProvider(new AppServiceProvider());
-$container->addServiceProvider(new ViewServiceProvider());
+/* Container setup, Autowire & Service Providers */
+$container = (new Container)
+    ->delegate(new ReflectionContainer)
+    ->addServiceProvider(new AppServiceProvider())
+    ->addServiceProvider(new ViewServiceProvider());
 
 /* Router setup */
 $router = $container->get(Router::class);
