@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Providers\AppServiceProvider;
-use App\Providers\ViewServiceProvider;
+use App\Providers\ConfigServiceProvider;
 use Dotenv\Exception\InvalidPathException;
 use League\Container\Container;
 use League\Container\ReflectionContainer;
@@ -11,7 +10,7 @@ use League\Route\Router;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-//session_start();
+session_start();
 
 /* Load environment variables */
 try {
@@ -23,8 +22,11 @@ try {
 /* Container setup, Autowire & Service Providers */
 $container = (new Container)
     ->delegate(new ReflectionContainer)
-    ->addServiceProvider(new AppServiceProvider())
-    ->addServiceProvider(new ViewServiceProvider());
+    ->addServiceProvider(new ConfigServiceProvider());
+
+foreach ($container->get('config')->get('app.providers') as $provider) {
+    $container->addServiceProvider(new $provider);
+}
 
 /* Router setup */
 $router = $container->get(Router::class);
