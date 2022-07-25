@@ -20,7 +20,9 @@ class HomeController
         $response = new Response;
 
         return $this->view->render($response, 'home.twig', [
-            'message' => 'Hey Twig!'
+            'message' => [
+                'nested' => 'Hello'
+            ]
         ]);
     }
 }

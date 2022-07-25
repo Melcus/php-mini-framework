@@ -4,9 +4,9 @@ use App\Providers\AppServiceProvider;
 use App\Providers\ViewServiceProvider;
 
 return [
-    'name' => getenv('APP_NAME'),
+    'name' => env('APP_NAME', 'Funky'),
 
-    'debug' => getenv('APP_DEBUG'),
+    'debug' => env('APP_DEBUG', false),
 
     'providers' => [
         AppServiceProvider::class,
