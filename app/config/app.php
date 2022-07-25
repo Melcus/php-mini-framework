@@ -1,7 +1,6 @@
 <?php
 
-use App\Providers\AppServiceProvider;
-use App\Providers\ViewServiceProvider;
+use App\Providers\{AppServiceProvider, DatabaseServiceProvider, ViewServiceProvider};
 
 return [
     'name' => env('APP_NAME', 'Funky'),
@@ -10,6 +9,7 @@ return [
 
     'providers' => [
         AppServiceProvider::class,
-        ViewServiceProvider::class
+        ViewServiceProvider::class,
+        DatabaseServiceProvider::class
     ]
 ];

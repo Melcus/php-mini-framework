@@ -16,6 +16,9 @@
     "league/container": "^4.2",
     "laminas/laminas-diactoros": "^2.13",
     "laminas/laminas-httphandlerrunner": "^2.1",
-    "twig/twig": "^3.0"
+    "twig/twig": "^3.0",
+    "doctrine/orm": "^2.12",
+    "symfony/cache": "^6.1",
+    "doctrine/annotations": "^1.13"
   }
 }
