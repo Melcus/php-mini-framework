@@ -27,7 +27,7 @@ abstract class BaseEntity
         throw new UnexpectedValueException("Property $property does not exist");
     }
 
-    public function __isset(string $property)
+    public function __isset(string $property): bool
     {
         return property_exists($this, $property);
     }
