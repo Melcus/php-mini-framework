@@ -30,11 +30,16 @@ foreach ($container->get('config')->get('app.providers') as $provider) {
     $container->addServiceProvider(new $provider);
 }
 
-/* Router setup */
+/* Router & Middleware setup */
 $router = $container->get(Router::class);
+
+foreach ($container->get('config')->get('app.middleware') as $middleware) {
+    $router->middleware($container->get($middleware));
+}
 
 require_once base_path('routes/web.php');
 
+/* Handle response */
 try {
     $response = $router->dispatch($container->get('request'));
 } catch (Exception $exception) {

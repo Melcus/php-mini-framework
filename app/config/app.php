@@ -1,5 +1,7 @@
 <?php
 
+use App\Middleware\ClearValidationErrors;
+use App\Middleware\ShareValidationErrors;
 use App\Providers\{AppServiceProvider, DatabaseServiceProvider, SessionServiceProvider, ViewServiceProvider};
 
 return [
@@ -12,5 +14,10 @@ return [
         ViewServiceProvider::class,
         DatabaseServiceProvider::class,
         SessionServiceProvider::class,
+    ],
+
+    'middleware' => [
+        ShareValidationErrors::class,
+        ClearValidationErrors::class,
     ]
 ];

@@ -21,4 +21,11 @@ class View
 
         return $response;
     }
+
+    public function share(array $data): void
+    {
+        foreach ($data as $key => $value) {
+            $this->twig->addGlobal($key, $value);
+        }
+    }
 }
