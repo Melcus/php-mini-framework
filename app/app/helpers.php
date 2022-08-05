@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Laminas\Diactoros\Response\RedirectResponse;
+
 if (!function_exists('base_path')) {
     function base_path($path = ''): string
     {
@@ -23,5 +25,12 @@ if (!function_exists('env')) {
             'false' => false,
             default => $value,
         };
+    }
+}
+
+if (!function_exists('redirect')) {
+    function redirect($path): RedirectResponse
+    {
+       return new RedirectResponse($path);
     }
 }

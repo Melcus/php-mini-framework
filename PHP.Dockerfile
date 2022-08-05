@@ -8,4 +8,6 @@ RUN docker-php-ext-install pdo pdo_mysql opcache
 
 RUN pecl install xdebug && docker-php-ext-enable xdebug && docker-php-ext-enable opcache
 
+COPY ./php.ini "${PHP_INI_DIR}/conf.d"
+
 WORKDIR /app

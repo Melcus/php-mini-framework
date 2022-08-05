@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Exceptions\Handler;
 use App\Providers\ConfigServiceProvider;
+use App\Session\SessionStore;
 use Dotenv\Exception\InvalidPathException;
 use League\Container\Container;
 use League\Container\ReflectionContainer;
@@ -33,6 +35,13 @@ $router = $container->get(Router::class);
 
 require_once base_path('routes/web.php');
 
-$response = $router->dispatch($container->get('request'));
+try {
+    $response = $router->dispatch($container->get('request'));
+} catch (Exception $exception) {
+    $response = (new Handler(
+        $exception,
+        $container->get(SessionStore::class)
+    ))->respond();
+}
 
 $container->get('emitter')->emit($response);

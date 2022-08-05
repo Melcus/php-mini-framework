@@ -1,1 +1,5 @@
-<h3>{{ user ? dump(user.name) : 'No entry in table users' }}</h3>
+{% extends 'templates/app.twig' %}
+
+{% block content %}
+    <h3>Home page</h3>
+{% endblock %}
