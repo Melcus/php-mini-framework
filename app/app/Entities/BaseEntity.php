@@ -11,7 +11,7 @@ abstract class BaseEntity
     public function __get(string $property): mixed
     {
         if (property_exists($this, $property)) {
-            return $this->$property;
+            return $this->{$property};
         }
 
         return null;
@@ -20,7 +20,7 @@ abstract class BaseEntity
     public function __set(string $property, mixed $value)
     {
         if (property_exists($this, $property)) {
-            $this->$property = $value;
+            $this->{$property} = $value;
             return $this;
         }
 
@@ -30,5 +30,14 @@ abstract class BaseEntity
     public function __isset(string $property): bool
     {
         return property_exists($this, $property);
+    }
+
+    public function update(array $data): bool
+    {
+        foreach ($data as $key => $value) {
+            $this->{$key} = $value;
+        }
+
+        return true;
     }
 }

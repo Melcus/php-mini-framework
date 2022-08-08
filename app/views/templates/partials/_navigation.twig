@@ -12,23 +12,26 @@
                 </button>
             </div>
             <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <div class="flex-shrink-0 flex items-center">
+                <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center">
                     <img class="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
                     <img class="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow">
-                </div>
+                </a>
                 <div class="hidden sm:block sm:ml-6">
                     <div class="flex space-x-4">
-                        <a href="{{ route('home') }}" class="{{ isRoute('home') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
+                        {% if auth.check %}
+                            <a href="{{ route('home') }}" class="{{ isRoute('home') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div class="ml-3 relative flex">
-                    {% if true %}
+                    {% if auth.check %}
+                        <a href="#" class="block px-4 py-2 text-white text-sm">{{ auth.user.name }}</a>
+                        <a href="#" class="block px-4 py-2 text-white text-sm">Logout</a>
+                    {% else %}
                         <a href="{{ route('auth.login') }}" class="block px-4 py-2 text-white text-sm {{ isRoute('auth.login') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">Login</a>
                         <a href="#" class="block px-4 py-2 text-white text-sm">Register</a>
-                    {% else %}
-                        <a href="#" class="block px-4 py-2 text-white text-sm">Logout</a>
                     {% endif %}
                 </div>
             </div>

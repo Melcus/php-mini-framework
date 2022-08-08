@@ -1,9 +1,15 @@
 <?php
 
+use App\Middleware\Authenticate;
 use App\Middleware\ClearValidationErrors;
 use App\Middleware\ShareValidationErrors;
 use App\Middleware\ViewShareMiddleware;
-use App\Providers\{AppServiceProvider, DatabaseServiceProvider, SessionServiceProvider, ViewServiceProvider};
+use App\Providers\{AppServiceProvider,
+    AuthServiceProvider,
+    DatabaseServiceProvider,
+    HashServiceProvider,
+    SessionServiceProvider,
+    ViewServiceProvider};
 
 return [
     'name' => env('APP_NAME', 'Funky'),
@@ -15,11 +21,14 @@ return [
         ViewServiceProvider::class,
         DatabaseServiceProvider::class,
         SessionServiceProvider::class,
+        HashServiceProvider::class,
+        AuthServiceProvider::class,
     ],
 
     'middleware' => [
         ShareValidationErrors::class,
         ClearValidationErrors::class,
         ViewShareMiddleware::class,
+        Authenticate::class
     ]
 ];
