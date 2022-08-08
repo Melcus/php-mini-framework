@@ -2,6 +2,7 @@
 
 use App\Middleware\ClearValidationErrors;
 use App\Middleware\ShareValidationErrors;
+use App\Middleware\ViewShareMiddleware;
 use App\Providers\{AppServiceProvider, DatabaseServiceProvider, SessionServiceProvider, ViewServiceProvider};
 
 return [
@@ -19,5 +20,6 @@ return [
     'middleware' => [
         ShareValidationErrors::class,
         ClearValidationErrors::class,
+        ViewShareMiddleware::class,
     ]
 ];

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Config\Config;
 use App\Exceptions\Handler;
 use App\Providers\ConfigServiceProvider;
 use App\Session\SessionStore;
@@ -26,14 +27,14 @@ $container = (new Container)
     ->delegate(new ReflectionContainer)
     ->addServiceProvider(new ConfigServiceProvider());
 
-foreach ($container->get('config')->get('app.providers') as $provider) {
+foreach ($container->get(Config::class)->get('app.providers') as $provider) {
     $container->addServiceProvider(new $provider);
 }
 
 /* Router & Middleware setup */
 $router = $container->get(Router::class);
 
-foreach ($container->get('config')->get('app.middleware') as $middleware) {
+foreach ($container->get(Config::class)->get('app.middleware') as $middleware) {
     $router->middleware($container->get($middleware));
 }
 

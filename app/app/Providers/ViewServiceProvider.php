@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Config\Config;
 use App\Views\View;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use Twig\Environment;
@@ -23,7 +24,7 @@ class ViewServiceProvider extends AbstractServiceProvider
     {
         $container = $this->getContainer();
 
-        $config = $container->get('config');
+        $config = $container->get(Config::class);
 
         $container->addShared(View::class, function () use ($config) {
             $loader = new FilesystemLoader(base_path('views'));

@@ -12,14 +12,14 @@ class ConfigServiceProvider extends AbstractServiceProvider
 {
     public function provides(string $id): bool
     {
-        $services = ['config'];
+        $services = [Config::class];
 
         return in_array($id, $services);
     }
 
     public function register(): void
     {
-        $this->getContainer()->addShared('config', function () {
+        $this->getContainer()->addShared(Config::class, function () {
             return (new Config)->load([
                 new ArrayLoader([
                     'app' => base_path('config/app.php'),
