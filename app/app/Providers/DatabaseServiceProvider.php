@@ -8,7 +8,7 @@ use App\Config\Config;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 class DatabaseServiceProvider extends AbstractServiceProvider
 {
@@ -28,11 +28,11 @@ class DatabaseServiceProvider extends AbstractServiceProvider
         $container->addShared(EntityManager::class, function () use ($config) {
             return EntityManager::create(
                 $config->get('database.' . env('DB_CONNECTION')),
-                ORMSetup::createAnnotationMetadataConfiguration(
+                ORMSetup::createAttributeMetadataConfiguration(
                     [base_path('app/Entities')],
                     $config->get('app.debug'),
                     null,
-                    new FilesystemAdapter()
+                    new ArrayAdapter()
                 )
             );
         });
