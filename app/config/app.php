@@ -7,6 +7,7 @@ use App\Middleware\ViewShareMiddleware;
 use App\Providers\{AppServiceProvider,
     AuthServiceProvider,
     DatabaseServiceProvider,
+    FlashServiceProvider,
     HashServiceProvider,
     SessionServiceProvider,
     ViewServiceProvider};
@@ -23,6 +24,7 @@ return [
         SessionServiceProvider::class,
         HashServiceProvider::class,
         AuthServiceProvider::class,
+        FlashServiceProvider::class
     ],
 
     'middleware' => [

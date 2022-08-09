@@ -6,6 +6,7 @@ namespace App\Controllers\Auth;
 
 use App\Auth\Auth;
 use App\Controllers\Controller;
+use App\Session\Flash;
 use App\Views\View;
 use Laminas\Diactoros\Response;
 use League\Route\Router;
@@ -17,7 +18,8 @@ class LoginController extends Controller
     public function __construct(
         protected View $view,
         protected Auth $auth,
-        protected Router $router
+        protected Router $router,
+        protected Flash $flash
     ) {
     }
 
@@ -38,8 +40,9 @@ class LoginController extends Controller
         $attempt = $this->auth->attempt($data['email'], $data['password']);
 
         if (!$attempt) {
-            // todo: implement flashing
-            dd('failed');
+            $this->flash->now('error', 'Could not sign you in with those details');
+
+            return redirect($request->getUri()->getPath());
         }
 
         return redirect($this->router->getNamedRoute('home')->getPath());
