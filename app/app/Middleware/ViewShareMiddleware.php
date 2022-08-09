@@ -6,6 +6,7 @@ namespace App\Middleware;
 
 use App\Auth\Auth;
 use App\Config\Config;
+use App\Security\Csrf;
 use App\Session\Flash;
 use App\Views\View;
 use Psr\Http\Message\ResponseInterface;
@@ -19,7 +20,8 @@ class ViewShareMiddleware implements MiddlewareInterface
         protected View $view,
         protected Config $config,
         protected Auth $auth,
-        protected Flash $flash
+        protected Flash $flash,
+        protected Csrf $csrf
     ) {
     }
 
@@ -28,7 +30,8 @@ class ViewShareMiddleware implements MiddlewareInterface
         $this->view->share([
             'config' => $this->config,
             'auth' => $this->auth,
-            'flash' => $this->flash
+            'flash' => $this->flash,
+            'csrf' => $this->csrf
         ]);
 
         return $handler->handle($request);

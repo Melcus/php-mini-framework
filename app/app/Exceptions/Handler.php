@@ -5,20 +5,24 @@ declare(strict_types=1);
 namespace App\Exceptions;
 
 use App\Session\SessionStore;
+use App\Views\View;
 use Exception;
+use Laminas\Diactoros\Response;
 use Laminas\Diactoros\Response\RedirectResponse;
+use Psr\Http\Message\ResponseInterface;
 use ReflectionClass;
 
 class Handler
 {
     public function __construct(
         protected Exception $exception,
-        protected SessionStore $session
+        protected SessionStore $session,
+        protected View $view
     ) {
     }
 
     /** @throws Exception */
-    public function respond(): RedirectResponse
+    public function respond(): ResponseInterface
     {
         $class = (new ReflectionClass($this->exception))->getShortName();
 
@@ -37,6 +41,11 @@ class Handler
         ]);
 
         return redirect($exception->getPath());
+    }
+
+    public function handleCsrfTokenException(): ResponseInterface
+    {
+        return $this->view->render(new Response, 'errors/csrf.twig');
     }
 
     /** @throws Exception */

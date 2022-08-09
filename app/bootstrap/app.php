@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use App\Config\Config;
-use App\Exceptions\Handler;
-use App\Providers\ConfigServiceProvider;
-use App\Session\SessionStore;
+use App\{Auth\Auth,
+    Config\Config,
+    Exceptions\Handler,
+    Providers\ConfigServiceProvider,
+    Session\SessionStore,
+    Views\View};
 use Dotenv\Exception\InvalidPathException;
-use League\Container\Container;
-use League\Container\ReflectionContainer;
-use League\Route\Router;
+use League\{Container\Container, Container\ReflectionContainer, Route\Router};
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -46,10 +46,11 @@ try {
 } catch (Exception $exception) {
     $response = (new Handler(
         $exception,
-        $container->get(SessionStore::class)
+        $container->get(SessionStore::class),
+        $container->get(View::class),
     ))->respond();
 }
 
-ray($_SESSION, $container->get(\App\Auth\Auth::class));
+ray($_SESSION, $container->get(Auth::class));
 
 $container->get('emitter')->emit($response);

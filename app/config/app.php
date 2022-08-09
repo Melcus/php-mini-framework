@@ -2,10 +2,12 @@
 
 use App\Middleware\Authenticate;
 use App\Middleware\ClearValidationErrors;
+use App\Middleware\CsrfGuard;
 use App\Middleware\ShareValidationErrors;
 use App\Middleware\ViewShareMiddleware;
 use App\Providers\{AppServiceProvider,
     AuthServiceProvider,
+    CsrfServiceProvider,
     DatabaseServiceProvider,
     FlashServiceProvider,
     HashServiceProvider,
@@ -24,13 +26,15 @@ return [
         SessionServiceProvider::class,
         HashServiceProvider::class,
         AuthServiceProvider::class,
-        FlashServiceProvider::class
+        FlashServiceProvider::class,
+        CsrfServiceProvider::class
     ],
 
     'middleware' => [
         ShareValidationErrors::class,
         ClearValidationErrors::class,
         ViewShareMiddleware::class,
-        Authenticate::class
+        Authenticate::class,
+        CsrfGuard::class
     ]
 ];
