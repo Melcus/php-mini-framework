@@ -52,7 +52,7 @@ class Auth
 
     public function logout(): void
     {
-        // todo: implement
+        $this->session->clear(self::AUTH_SESSION_KEY);
     }
 
     public function hasUserInSession(): bool

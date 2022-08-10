@@ -51,6 +51,4 @@ try {
     ))->respond();
 }
 
-ray($_SESSION, $container->get(Auth::class));
-
 $container->get('emitter')->emit($response);

@@ -31,7 +31,7 @@ class ViewShareMiddleware implements MiddlewareInterface
             'config' => $this->config,
             'auth' => $this->auth,
             'flash' => $this->flash,
-            'csrf' => $this->csrf
+            'csrf' => $this->csrf,
         ]);
 
         return $handler->handle($request);

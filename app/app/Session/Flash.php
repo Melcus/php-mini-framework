@@ -39,16 +39,11 @@ class Flash
 
     protected function loadFlashMessagesIntoCache(): void
     {
-        $this->messages = $this->getAll();
+        $this->messages = $this->session->get('flash') ?? [];
     }
 
     protected function clear(): void
     {
         $this->session->clear('flash');
-    }
-
-    protected function getAll(): array
-    {
-        return $this->session->get('flash') ?? [];
     }
 }

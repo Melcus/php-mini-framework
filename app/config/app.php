@@ -12,6 +12,7 @@ use App\Providers\{AppServiceProvider,
     FlashServiceProvider,
     HashServiceProvider,
     SessionServiceProvider,
+    ValidationServiceProvider,
     ViewServiceProvider};
 
 return [
@@ -27,7 +28,8 @@ return [
         HashServiceProvider::class,
         AuthServiceProvider::class,
         FlashServiceProvider::class,
-        CsrfServiceProvider::class
+        CsrfServiceProvider::class,
+        ValidationServiceProvider::class
     ],
 
     'middleware' => [

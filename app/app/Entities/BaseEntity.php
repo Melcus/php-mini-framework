@@ -40,4 +40,13 @@ abstract class BaseEntity
 
         return true;
     }
+
+    public function fill(array $data): self
+    {
+        foreach ($data as $key => $value) {
+            $this->{$key} = $value;
+        }
+
+        return $this;
+    }
 }
