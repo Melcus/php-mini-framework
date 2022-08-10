@@ -35,7 +35,7 @@
                         </a>
                     {% else %}
                         <a href="{{ route('login') }}" class="block px-4 py-2 text-white text-sm {{ isRoute('login') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">Login</a>
-                        <a href="{{ route('register') }}" class="block px-4 py-2 text-white text-sm">Register</a>
+                        <a href="{{ route('register') }}" class="block px-4 py-2 text-white text-sm {{ isRoute('register') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">Register</a>
                     {% endif %}
                 </div>
             </div>
