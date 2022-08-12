@@ -10,7 +10,7 @@ use Valitron\Validator;
 
 abstract class Controller
 {
-    public function validate(ServerRequestInterface $request, array $rules)
+    public function validate(ServerRequestInterface $request, array $rules): array
     {
         $validator = new Validator($request->getParsedBody());
 

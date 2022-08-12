@@ -25,10 +25,10 @@ $router->group('', function (RouteGroup $router) {
 
     $router->get('/login', [LoginController::class, 'index'])->setName('login');
 
-    $router->post('/login', [LoginController::class, 'store']);
+    $router->post('/login', [LoginController::class, 'store'])->setName('login.store');
 
     $router->get('/register', [RegisterController::class, 'index'])->setName('register');
 
-    $router->post('/register', [RegisterController::class, 'store']);
+    $router->post('/register', [RegisterController::class, 'store'])->setName('register.store');
 
 })->middleware($container->get(Guest::class));

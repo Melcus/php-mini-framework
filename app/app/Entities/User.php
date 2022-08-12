@@ -23,4 +23,10 @@ class User extends BaseEntity
 
     #[ORM\Column(name: 'password', type: Types::STRING, length: 255, nullable: false)]
     protected string $password;
+
+    #[ORM\Column(name: 'remember_token', type: Types::STRING, length: 255, nullable: true)]
+    protected string $remember_token;
+
+    #[ORM\Column(name: 'remember_identifier', type: Types::STRING, length: 255, nullable: true)]
+    protected string $remember_identifier;
 }
