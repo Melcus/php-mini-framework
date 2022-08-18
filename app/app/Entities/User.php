@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -11,6 +12,10 @@ use Doctrine\ORM\Mapping AS ORM;
 #[ORM\Table('users')]
 class User extends BaseEntity
 {
+    public function __construct() {
+        $this->bookings = new ArrayCollection();
+    }
+
     #[ORM\Column(type: Types::INTEGER)]
     #[ORM\Id, ORM\GeneratedValue(strategy: 'AUTO')]
     protected int $id;
@@ -29,4 +34,7 @@ class User extends BaseEntity
 
     #[ORM\Column(name: 'remember_identifier', type: Types::STRING, length: 255, nullable: true)]
     protected string $remember_identifier;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Booking::class)]
+    protected $bookings;
 }
